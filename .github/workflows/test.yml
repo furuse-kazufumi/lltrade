@@ -1,0 +1,51 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install package + dev deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Lint with ruff
+        run: |
+          ruff check src/ tests/
+          ruff format --check src/ tests/
+
+      - name: Run pytest
+        run: pytest -v
+
+      - name: Verify REAL_TRADING is hard-pinned False
+        run: |
+          python -c "
+          import lltrade, sys
+          if lltrade.REAL_TRADING is not False:
+              print('REAL_TRADING is not False — paper-only pin violated', file=sys.stderr)
+              sys.exit(1)
+          lltrade.assert_paper_only()
+          print(f'paper-only guard OK (v{lltrade.__version__})')
+          "
