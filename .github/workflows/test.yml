@@ -44,7 +44,7 @@ jobs:
           python -c "
           import lltrade, sys
           if lltrade.REAL_TRADING is not False:
-              print('REAL_TRADING is not False — paper-only pin violated', file=sys.stderr)
+              print('REAL_TRADING is not False - paper-only pin violated', file=sys.stderr)
               sys.exit(1)
           lltrade.assert_paper_only()
           print(f'paper-only guard OK (v{lltrade.__version__})')
