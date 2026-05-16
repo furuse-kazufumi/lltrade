@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jekyll
+docs/_site/
+docs/.jekyll-cache/
+docs/.bundle/
+docs/vendor/
+
+# Market data caches (lltrade-specific)
+data/
+*.parquet
+*.feather
+*.h5
+.cache/
