@@ -1,0 +1,15 @@
+lltrade
+Copyright 2026 Kazufumi Furuse
+
+This product includes software developed as part of the FullSense ™ family
+(https://furuse-kazufumi.github.io/fullsense/).
+
+FullSense ™ / llmesh ™ / llive ™ / llove ™ / lltrade ™ are trademarks of
+Kazufumi Furuse. See TRADEMARK policy in the llive repository:
+https://github.com/furuse-kazufumi/llive/blob/main/TRADEMARK.md
+
+DISCLAIMER: lltrade is research / educational software. It is NOT financial
+advice. Operators are responsible for their own trading decisions, regulatory
+compliance, and tax obligations.
+
+Until v1.0+, lltrade is hard-pinned to PAPER TRADING ONLY (real_trading=false).

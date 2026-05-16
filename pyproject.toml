@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "llmesh-lltrade"
+version = "0.0.1"
+description = "Trading research for the FullSense LLM family — PAPER-TRADING ONLY (v0.x). LLM-assisted backtest, strategy proposal, and risk-aware execution gated by llive Approval Bus."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.11,<3.12"
+authors = [{name = "Kazufumi Furuse", email = "kazufumi@furuse.work"}]
+keywords = [
+  "fullsense", "llmesh", "llive", "llove",
+  "trading", "backtest", "paper-trading", "quant",
+  "llm", "risk", "audit",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3.11",
+  "Operating System :: OS Independent",
+  "Topic :: Office/Business :: Financial :: Investment",
+  "Intended Audience :: Financial and Insurance Industry",
+]
+dependencies = []
+
+[project.optional-dependencies]
+llive = ["llmesh-llive>=0.6"]
+llove = ["llmesh-llove>=0.2"]
+backtest = ["backtrader", "vectorbt"]
+data = ["yfinance", "ccxt"]
+dev = ["pytest>=7", "pytest-cov", "ruff", "mypy"]
+
+[project.urls]
+Homepage   = "https://furuse-kazufumi.github.io/lltrade/"
+Source     = "https://github.com/furuse-kazufumi/lltrade"
+Tracker    = "https://github.com/furuse-kazufumi/lltrade/issues"
+FullSense  = "https://furuse-kazufumi.github.io/fullsense/"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lltrade"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra -q"
+
+# ─── Safety pin: v0.x is paper-only ─────────────────────────────────────────
+# Do not change this without a maintainer-signed exemption. See CONTRIBUTING.md
+[tool.lltrade.safety]
+real_trading = false
+real_trading_pin_version = "0.x"
+exempt_after = "1.0.0"
