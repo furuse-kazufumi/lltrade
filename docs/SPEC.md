@@ -101,6 +101,28 @@ verdict = session.submit_for_review(result, reviewer="self")
 | On-prem inference | n/a | n/a | n/a | n/a | n/a | **yes** |
 | Hard paper-only pin | no | no | no | no | no | **yes** (v0.x) |
 
+### vs. generic coding agents (Claude Code / Codex CLI / Gemini CLI)
+
+| Capability | Claude Code | Codex CLI | Gemini CLI | **lltrade** |
+|---|---|---|---|---|
+| General code editing | A (SOTA) | A | A− | not the goal |
+| **Risk-aware signal emission** | no | no | no | **yes** (RPAR axis) |
+| **Per-signal Approval Bus gate** | warning only | approval mode | approval mode | **yes** (`block_until_decided`) |
+| **Hard paper-only safety pin** | no | no | no | **yes** (3-layer pin) |
+| **Audit Ledger** (SIL) | no | no | no | **yes** (SQLite, via llive) |
+| **On-prem inference** | no (cloud) | no (cloud) | no (cloud) | **yes** (Ollama) |
+| **End-to-end OSS** (incl. backend) | no | CLI only | CLI only | **yes** |
+| HITL TUI (vs CLI approval) | no | CLI prompt | CLI prompt | **yes** (llove) |
+| Backtest engine adapter (built-in) | no | no | no | **yes** (Backtrader/vectorbt/Nautilus) |
+
+**Positioning**: generic coding agents can write a strategy file but cannot
+enforce risk constraints, gate signals, or pin themselves to paper-only.
+lltrade exists to make those constraints **architectural** rather than
+"hope the operator remembered". Use a generic agent for one-off scripts;
+use lltrade when the output must survive a compliance review.
+
+See the umbrella comparison: [FullSense Comparison](https://furuse-kazufumi.github.io/fullsense/comparison.html).
+
 ## Risk model (v0.0.x)
 
 Even in paper mode, signals are subject to:
